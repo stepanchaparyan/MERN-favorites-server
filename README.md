@@ -17,4 +17,5 @@ $ npm start
 ```
 # Server is running on heroku
 ```
+https://favorites-server-2.herokuapp.com/ - heroku server
 ```
