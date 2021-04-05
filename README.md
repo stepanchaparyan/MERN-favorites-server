@@ -6,7 +6,7 @@ Simple node server for Wise_Mind page
 #### Used technologies
 
 ```
-Node, Express, Mongo, Mangoose
+Node, Express, Mongo, Mangoose, Swagger
 ```
 
 # Install guide
