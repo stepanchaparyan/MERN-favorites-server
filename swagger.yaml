@@ -1,0 +1,164 @@
+openapi: 3.0.1
+info:
+  title: Swagger for MERN-favorites-v2
+  version: 1.0.0
+externalDocs:
+  description: Proect in Git
+  url: https://github.com/stepanchaparyan/MERN-favorites-v2
+servers:
+- url: http://localhost:5000/api
+- url: https://localhost:5000/api
+tags:
+- name: user
+  description: 'Login'
+- name: product
+  description: Products APIs
+paths:
+  /auth:
+    post:
+      tags:
+      - user
+      summary: Log In
+      description: LogIn there to get token for authorize
+      operationId: Login
+      requestBody:
+        content:
+          application/json:
+            schema:
+             $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        '200':
+          description: Sample response
+        '400':
+          description: Invalid response
+        default:
+          description: successful operation
+          content: {}
+  /products/add:
+    post:
+      tags:
+      - product
+      summary: Add a new product to the store
+      description: Add a new product
+      operationId: addProduct
+      requestBody:
+        content:
+          application/json:
+            schema:
+             $ref: '#/components/schemas/Product'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Product'
+        required: true
+      responses:
+        405:
+          description: Invalid input
+          content: {}
+      security:
+      - auth-token: []
+  /products:
+    get:
+      tags:
+      - product
+      summary: Finds all products
+      description: Find all products without any parameters
+      operationId: findAllProducts
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        400:
+          description: Invalid status value
+          content: {}
+      security:
+      - auth-token: []
+  /products/{productId}:
+    get:
+      tags:
+      - product
+      summary: Finds Product by ID
+      description: Get one product by given ID
+      parameters:
+      - name: productId
+        in: path
+        description: Id of product to get
+        required: true
+        schema:
+          type: string
+          format: int64
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        400:
+          description: Invalid ID supplied
+          content: {}
+        404:
+          description: Product not found
+          content: {}
+      security:
+      - auth-token: []
+components:
+  schemas:
+    User:
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          example: test05@gmail.com
+        password:
+          type: string
+          format: password
+          example: AAAAAA
+      xml:
+        name: User
+    Product:
+      required:
+      - countInStock
+      - name
+      - price
+      type: object
+      properties:
+        createdBy:
+          $ref: '#/components/schemas/User'
+        description:
+          type: string
+          description: Simple description of product
+          example: Chinese Christmas tree
+        name:
+          type: string
+          description: Name of product
+          example: Christmas tree
+        price:
+          type: integer
+          description: Price of product
+          example: 100
+        countInStock:
+          type: integer
+          description: The count of product in stock at currect time
+          example: 3
+        imageUrl:
+          type: string
+      xml:
+        name: Product
+  securitySchemes:
+    auth-token:
+      type: apiKey
+      name: auth-token
+      in: header

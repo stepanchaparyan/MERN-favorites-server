@@ -3,17 +3,23 @@ const fileUpload = require('express-fileupload');
 const cors = require('cors');
 const app = express();
 const auth = require('./middleware/auth');
+const swaggerUI = require('swagger-ui-express');
+const YAML = require('yamljs');
+const swaggerDocument = YAML.load('./swagger.yaml');
 
 require('dotenv').config();
 
 app.use(cors());
 
-//connet to mongoDB
+//connect to mongoDB
 const connectDB = require('./mongoConfig/mongoDB');
 connectDB();
 
 app.use(fileUpload());
 app.use(express.json({ extended: true }));
+
+// swagger settings
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 // API routes
 app.use('/api/register', require('./routes/register'));
