@@ -3,11 +3,11 @@ info:
   title: Swagger for MERN-favorites-v2
   version: 1.0.0
 externalDocs:
-  description: Proect in Git
+  description: Project in Git
   url: https://github.com/stepanchaparyan/MERN-favorites-v2
 servers:
+- url: https://favorites-server-2.herokuapp.com/api
 - url: http://localhost:5000/api
-- url: https://localhost:5000/api
 tags:
 - name: user
   description: 'Login'
