@@ -18,5 +18,5 @@ $ npm start
 # Server is running on heroku
 ```
 https://favorites-server-2.herokuapp.com/ - heroku server
-https://favorites-server-2.herokuapp.com/api-docs/ - swagger doc
+https://favorites-server-2.herokuapp.com/api-docs/ - Swagger doc
 ```
