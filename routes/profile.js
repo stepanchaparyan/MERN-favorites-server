@@ -13,6 +13,9 @@ router.post('/add', async (req, res) => {
   const { name, surname, email, image, gender, birthDay, phoneNumber } = req.body;
 
   try {
+    const existingProfile = await Profile.find({ user: req.user.id });
+    if (existingProfile.length) return res.status(409).json({ msg: 'You already have a profile' });
+
     const newProfile = new Profile({
       user: req.user.id,
       name,
