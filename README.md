@@ -1,6 +1,6 @@
-# Wise_Mind_Server
+# Favorites cards page
 
-Simple node server for Wise_Mind page
+Simple node server for favorites cards
 ### MERN - Mongo Express React Node
 
 #### Used technologies
