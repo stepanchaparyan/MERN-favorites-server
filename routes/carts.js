@@ -21,8 +21,6 @@ router.post('/add', async (req, res) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  console.log(req);
-
   const { productId, qty, name, price, countInStock, imageUrl } = req.body;
   try {
     const newCart = new Cart({
@@ -48,7 +46,7 @@ router.delete('/delete/:id', async (req, res) => {
     let cart = await Cart.findById(req.params.id);
     if (!cart) return res.status(404).json({ msg: 'Cart not found' });
     await Cart.findByIdAndRemove(req.params.id);
-    res.send('Cart Removed successfully');
+    res.json(cart);
   } catch (err) {
     console.errors(err.message).json('Server Error');
   }
