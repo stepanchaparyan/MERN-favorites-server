@@ -97,7 +97,7 @@ router.delete('/delete/:id', async (req, res) => {
     let product = await Product.findById(req.params.id);
     if (!product) return res.status(404).json({ msg: 'Product not found' });
     await Product.findByIdAndRemove(req.params.id);
-    res.send('Product Removed successfully');
+    res.send(product);
   } catch (err) {
     console.errors(err.message).json('Server Error');
   }
