@@ -28,7 +28,7 @@
     "require-await": 2,
     "no-dupe-keys": 2,
     "keyword-spacing": [2, { "overrides": { "if": { "after": true } } }],
-    "linebreak-style": [2, "unix"],
+    "linebreak-style": [0, "unix"],
     "quotes": [2, "single"],
     "semi": [2, "always"],
     "no-var": 2,
